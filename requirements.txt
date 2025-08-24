@@ -1,7 +1,8 @@
 fastapi
-uvicorn
+uvicorn[standard]
 sqlalchemy
 pydantic
 python-jose[cryptography]
 passlib[bcrypt]
 databases[sqlite]
+python-multipart]
