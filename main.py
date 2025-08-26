@@ -351,6 +351,19 @@ async def get_progress(db, student_id: int, lesson_id: int):
 # FastAPI app
 app = FastAPI(title="LCMS Backend")
 
+# CORS configuration (NEW ADDITION)
+from fastapi.middleware.cors import CORSMiddleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://lcms-frontend.onrender.com",  # Replace with your actual frontend URL
+        "http://localhost:3000"  # For local testing
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allow all headers (e.g., Authorization)
+)
+
 # Routes
 @app.post("/users/", response_model=UserResponse)
 async def create_user_route(user: UserCreate, db=Depends(get_db), current_user: User = Depends(get_current_active_user)):
